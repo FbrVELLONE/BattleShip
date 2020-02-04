@@ -6,7 +6,7 @@ public class Board{
      * Attributs
      */
     String nom;
-    char[][] navires;
+    Character[][] navires;
     boolean[][] frappes;
 
     /**
@@ -16,7 +16,7 @@ public class Board{
      */
     public Board(String aNom, int taille){
         this.nom = aNom;
-        this.navires = new char[taille][taille];
+        this.navires = new Character[taille][taille];
         this.frappes = new boolean[taille][taille];
     }
 
@@ -27,11 +27,61 @@ public class Board{
 
     public Board(String aNom){
         this.nom = aNom;
-        this.navires = new char[10][10];
+        this.navires = new Character[10][10];
         this.frappes = new boolean[10][10];
     }
 
+    public void print(){
+        System.out.println("Navires: ");
+        System.out.print("  ");
+        char aux = 65;
+        for(int y = 0; y <= this.navires.length; y++){
+            
+            if (y != 0){
+                if (y != 10){
+                    System.out.print(y + "  ");
+                }else   
+                    System.out.print(y + " ");
+            }
+            for (int x = 0; x < this.navires.length; x++) {
+                if (y == 0){
+                    System.out.print(" " + aux);
+                    aux++;
+                }else
+                    System.out.print(". ");
+                
+            }
+            
+            System.out.println("");
+        }
 
+        System.out.println("Frappes: ");
+        System.out.print("  ");
+        aux = 65;
+        for(int y = 0; y <= this.navires.length; y++){
+            
+            if (y != 0){
+                if (y != 10){
+                    System.out.print(y + "  ");
+                }else   
+                    System.out.print(y + " ");
+            }
+            for (int x = 0; x < this.navires.length; x++) {
+                if (y == 0){
+                    System.out.print(" " + aux);
+                    aux++;
+                }else
+                    System.out.print(". ");
+                
+            }
+            
+            System.out.println("");
+        }
+    }
+
+    public void main (String args){
+        print();
+    }
 
 
 }
