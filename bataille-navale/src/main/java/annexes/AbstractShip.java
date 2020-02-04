@@ -4,7 +4,7 @@ public abstract class AbstractShip {
     /**
      * Attributs
      */
-    protected Character[] label;
+    protected Character label;
     protected String nom;
     protected int taille;
     protected int orientation;
@@ -22,7 +22,7 @@ public abstract class AbstractShip {
      * Constructeur
      */
 
-     public AbstractShip(Character[] aLabel, String aNom,int aTaille, int anOrientation){
+     public AbstractShip(Character aLabel, String aNom,int aTaille, int anOrientation){
          this.label = aLabel;
          this.nom = aNom;
          this.taille = aTaille;
