@@ -30,6 +30,9 @@ public class Board{
         this.navires = new Character[10][10];
         this.frappes = new boolean[10][10];
     }
+    /**
+     * montre le deux tableu
+     */
 
     public void print(){
         System.out.println("Navires: ");
@@ -77,10 +80,6 @@ public class Board{
             
             System.out.println("");
         }
-    }
-
-    public void main (String args){
-        print();
     }
 
 
