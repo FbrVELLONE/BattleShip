@@ -4,15 +4,14 @@ import annexes.AbstractShip;
 import annexes.Board;
 
 /**
- * Hello world!
+ * Pour éxecuter: mvn exec:java
  *
  */
 public class App 
 {
     public static void main( String[] args )
     {
-        Board table = new Board("suka");
-        Character[] labels = {'D','E','S','T','R'};
+        Board table = new Board("test");
         table.print();
     }
 }
