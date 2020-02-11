@@ -5,10 +5,57 @@ public class Board{
     /**
      * Attributs
      */
-    String nom;
-    Character[][] navires;
-    boolean[][] frappes;
+    private String nom;
+    private Character[][] navires;
+    private boolean[][] frappes;
 
+    /**
+     * Mutateur de nom
+     * @param nom
+     */
+    public void setNom(String nom){
+        this.nom = nom;
+    }
+
+    /**
+     * Mutateur de navires
+     * @param navires
+     */
+    public void setNavires(Character[][] navires){
+        this.navires = navires;
+    }
+
+    /**
+     * mutateur de frappes
+     * @param frappes
+     */
+    public void setFrappes(boolean[][]frappes){
+        this.frappes = frappes;
+    }
+
+    /**
+     * Accesseur de nom
+     * @return nom
+     */
+    public String getNom(){
+        return this.nom;
+    }
+
+    /**
+     * Accesseur de navires
+     * @return navires
+     */
+    public Character[][] getNavires(){
+        return this.navires;
+    }
+
+    /**
+     * Accesseur de frappes
+     * @return frappes
+     */
+    public boolean[][] getFrappes(){
+        return this.frappes;
+    }
     /**
      * Constructeur avec deux parametres
      * @param aNom  le nom du tableau
@@ -24,7 +71,6 @@ public class Board{
      * Constructeur qui prend le nom comme argument et donne la taille 10 par default
      * @param aNom
      */
-
     public Board(String aNom){
         this.nom = aNom;
         this.navires = new Character[10][10];
