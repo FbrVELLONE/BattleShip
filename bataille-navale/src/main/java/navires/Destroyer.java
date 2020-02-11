@@ -1,25 +1,23 @@
-package annexes;
+package navires;
+
+import annexes.Orientation;
 
 public class Destroyer extends AbstractShip{
     
-    @Override
-    public void print(){
-
-    }
 
     /**
      * Constructeur par default
      * orientation 0 = est
      */
     public Destroyer(){
-        super('D',"Destroyer",2,0);
+        super('D',"Destroyer",2,Orientation.EAST);
     }
 
     /**
      * Constructeur avec l'orientation
      * @param anOrientation
      */
-    public Destroyer(int anOrientation){
+    public Destroyer(Orientation anOrientation){
         super('D',"Destroyer",2,anOrientation);
     }
 }
