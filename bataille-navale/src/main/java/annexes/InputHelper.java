@@ -54,7 +54,7 @@ public final class InputHelper {
             }
 
             if (!done) {
-                System.err.println("Format incorrect! Entrez la position sous forme 'A0 n'");
+                System.err.println("Format incorrect! Entrez la position sous forme 'A1 n'");
             }
         } while (!done && sin.hasNextLine());
 

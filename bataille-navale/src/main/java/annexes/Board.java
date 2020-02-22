@@ -154,30 +154,58 @@ public class Board implements IBoard{
         int taille = ship.getTaille();
         switch (ship.getOrientation()) {
             case EAST:
-                for (int i = 0; i < taille; i++){
-                    navires[y-1][x-1+i] = ship.getLabel();
+                if ( x + taille <= navires.length){
+                    for (int i = 0; i < taille; i++){
+                        if (navires[y-1][x-1+i] == '.'){
+                            navires[y-1][x-1+i] = ship.getLabel();
+                        }else{
+                            throw new ArrayIndexOutOfBoundsException("This position has already been taken by another ship");
+                        }
+                    }
+                }else{
+                    throw new ArrayIndexOutOfBoundsException("Ship out of bounds, please enter another position or orientation");
                 }
-                  
                 break;
 
             case WEST:
-
-                for (int i = 0; i < taille; i++){
-                    navires[y-1][x-1-i] = ship.getLabel();
-                }
-                   
-                break;
-            case SOUTH:
-                for (int i = 0; i < taille; i++){
-                    navires[y-1+i][x-1] = ship.getLabel();
+                if ( x - taille >= 0){
+                    for (int i = 0; i < taille; i++){
+                        if (navires[y-1][x-1-i] == '.'){
+                            navires[y-1][x-1-i] = ship.getLabel();
+                        }else{
+                            throw new ArrayIndexOutOfBoundsException("This position has already been taken by another ship");
+                        }
+                    }
+                }else{
+                    throw new ArrayIndexOutOfBoundsException("Ship out of bounds, please enter another position or orientation");
                 }    
                 break;
+            case SOUTH:
+                if ( y + taille <= navires.length){
+                    for (int i = 0; i < taille; i++){
+                        if (navires[y-1+i][x-1] == '.'){
+                            navires[y-1+i][x-1] = ship.getLabel();
+                        }else{
+                            throw new ArrayIndexOutOfBoundsException("This position has already been taken by another ship");
+                        }
+                    }   
+                }else{
+                    throw new ArrayIndexOutOfBoundsException("Ship out of bounds, please enter another position or orientation");
+                } 
+                break;
             case NORTH:
-                for (int i = 0; i < taille; i++){
-                    navires[y-1-i][x-1] = ship.getLabel();
-                    System.out.println(navires[y-i][x]);
+                if ( y - taille >= 0){
+                    for (int i = 0; i < taille; i++){
+                        
+                        if (navires[y-1-i][x-1] == '.'){
+                            navires[y-1-i][x-1] = ship.getLabel();
+                        }else{
+                            throw new ArrayIndexOutOfBoundsException("This position has already been taken by another ship");
+                        }
+                    }
+                }else{
+                    throw new ArrayIndexOutOfBoundsException("Ship out of bounds, please enter another position or orientation");
                 }
-                   
                 break;
         }
 
