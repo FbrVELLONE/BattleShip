@@ -1,8 +1,11 @@
 package ensta;
 
-import annexes.Board;
-import annexes.Orientation;
-import navires.Destroyer;
+import navires.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import annexes.*;
 
 /**
  * Exercice 1.
@@ -17,16 +20,23 @@ public class App
     {
         //test de board
         Board table = new Board("Test");
+        Board table_2 = new Board("Test_2");
         table.print();
 
-        //test de navires
-        Destroyer ship_test = new Destroyer(Orientation.NORTH);
-        System.out.println(ship_test.getOrientation());
+        Submarine sub = new Submarine();
+        Destroyer dest = new Destroyer();
+        Carrier car = new Carrier();
+        Battleship battle = new Battleship();
 
-        table.putShip(ship_test, 5, 2);
-        table.setHit(true, 2, 1);
-        table.print();
+        List<AbstractShip> ships = new ArrayList<AbstractShip>();
+        ships.add(dest);
+        ships.add(sub);
+        ships.add(sub);
+        ships.add(battle);
+        ships.add(car);
+        Player Cachorra = new Player(table,table_2,ships);
 
+        Cachorra.putShips();
         
     }
 }

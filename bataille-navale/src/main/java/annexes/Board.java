@@ -149,7 +149,8 @@ public class Board implements IBoard{
         return this.navires.length;
     }
 
-    public void putShip(AbstractShip ship, int x, int y){
+    
+    public void putShip(AbstractShip ship, int x, int y) throws ArrayIndexOutOfBoundsException{
         int taille = ship.getTaille();
         switch (ship.getOrientation()) {
             case EAST:

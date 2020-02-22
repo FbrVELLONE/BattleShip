@@ -2,6 +2,7 @@ package annexes;
 
 import java.io.Serializable;
 import java.util.List;
+import navires.AbstractShip;
 
 public class Player {
     /* **
@@ -33,18 +34,44 @@ public class Player {
         boolean done = false;
         int i = 0;
 
+
         do {
             AbstractShip s = ships[i];
-            String msg = String.format("placer %d : %s(%d)", i + 1, s.getName(), s.getLength());
+
+            String msg = String.format("placer %d : %s(%d)", i + 1, s.getNom(), s.getTaille());
             System.out.println(msg);
             InputHelper.ShipInput res = InputHelper.readShipInput();
             // TODO set ship orientation
+            System.out.println(res.orientation);
+            if (res.orientation.equals("e")){
+                ships[i].setOrientation(Orientation.EAST);
+            }
+            if (res.orientation.equals("w")){
+                ships[i].setOrientation(Orientation.WEST);
+            }
+            if (res.orientation.equals("n")){
+                System.out.println("im in");
+                ships[i].setOrientation(Orientation.NORTH);
+            }
+            if (res.orientation.equals("s")){
+                ships[i].setOrientation(Orientation.SOUTH);
+            }
+
+            
             // TODO put ship at given position
-
+            try{
+                board.putShip(ships[i], res.x, res.y);
+                ++i;
+                
+            } catch(IndexOutOfBoundsException e){
+                System.out.println("Ship out of bounds, please enter another position");
+            }
+            
             // TODO when ship placement successful
-            ++i;
+            
+            
+            
             done = i == 5;
-
             board.print();
         } while (!done);
     }
@@ -57,7 +84,7 @@ public class Player {
             System.out.println("où frapper?");
             InputHelper.CoordInput hitInput = InputHelper.readCoordInput();
             // TODO call sendHit on this.opponentBoard
-
+            done = false;
             // TODO : Game expects sendHit to return BOTH hit result & hit coords.
             // return hit is obvious. But how to return coords at the same time ?
         } while (!done);
