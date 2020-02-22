@@ -154,34 +154,30 @@ public class Board implements IBoard{
         int taille = ship.getTaille();
         switch (ship.getOrientation()) {
             case EAST:
-                if ( x + taille <= navires.length){
-                    for (int i = 0; i < taille; i++){
-                        navires[y-1][x-1+i] = ship.getLabel();
-                    }
-                }    
+                for (int i = 0; i < taille; i++){
+                    navires[y-1][x-1+i] = ship.getLabel();
+                }
+                  
                 break;
 
             case WEST:
-                if ( x - taille >= 0){
-                    for (int i = 0; i < taille; i++){
-                        navires[y-1][x-1-i] = ship.getLabel();
-                    }
-                }    
+
+                for (int i = 0; i < taille; i++){
+                    navires[y-1][x-1-i] = ship.getLabel();
+                }
+                   
                 break;
             case SOUTH:
-                if ( y + taille <= navires.length){
-                    for (int i = 0; i < taille; i++){
-                        navires[y-1+i][x-1] = ship.getLabel();
-                    }
+                for (int i = 0; i < taille; i++){
+                    navires[y-1+i][x-1] = ship.getLabel();
                 }    
                 break;
             case NORTH:
-                if ( y - taille >= 0){
-                    for (int i = 0; i < taille; i++){
-                        navires[y-1-i][x-1] = ship.getLabel();
-                        System.out.println(navires[y-i][x]);
-                    }
-                }    
+                for (int i = 0; i < taille; i++){
+                    navires[y-1-i][x-1] = ship.getLabel();
+                    System.out.println(navires[y-i][x]);
+                }
+                   
                 break;
         }
 
