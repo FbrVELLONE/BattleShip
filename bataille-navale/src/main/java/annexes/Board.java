@@ -1,6 +1,6 @@
 package annexes;
 
-import navires.AbstractShip;
+import navires.*;
 
 public class Board implements IBoard{
 
@@ -8,8 +8,8 @@ public class Board implements IBoard{
      * Attributs
      */
     private String nom;
-    private Character[][] navires;
-    private boolean[][] frappes;
+    private ShipState[][] navires;
+    private Boolean[][] frappes;
 
     /**
      * Mutateur de nom
@@ -23,7 +23,7 @@ public class Board implements IBoard{
      * Mutateur de navires
      * @param navires
      */
-    public void setNavires(Character[][] navires){
+    public void setNavires(ShipState[][] navires){
         this.navires = navires;
     }
 
@@ -31,7 +31,7 @@ public class Board implements IBoard{
      * mutateur de frappes
      * @param frappes
      */
-    public void setFrappes(boolean[][]frappes){
+    public void setFrappes(Boolean[][]frappes){
         this.frappes = frappes;
     }
 
@@ -47,7 +47,7 @@ public class Board implements IBoard{
      * Accesseur de navires
      * @return navires
      */
-    public Character[][] getNavires(){
+    public ShipState[][] getNavires(){
         return this.navires;
     }
 
@@ -55,7 +55,7 @@ public class Board implements IBoard{
      * Accesseur de frappes
      * @return frappes
      */
-    public boolean[][] getFrappes(){
+    public Boolean[][] getFrappes(){
         return this.frappes;
     }
     /**
@@ -65,11 +65,10 @@ public class Board implements IBoard{
      */
     public Board(String aNom, int taille){
         this.nom = aNom;
-        this.navires = new Character[taille][taille];
-        for(int i = 0; i < taille; i++) for (int j = 0; j<taille; j++)
-            navires[j][i] = '.';
+        this.navires = new ShipState[taille][taille];
 
-        this.frappes = new boolean[taille][taille];
+
+        this.frappes = new Boolean[taille][taille];
     }
 
     /**
@@ -78,11 +77,10 @@ public class Board implements IBoard{
      */
     public Board(String aNom){
         this.nom = aNom;
-        this.navires = new Character[10][10];
-        for(int i = 0; i < 10; i++) for (int j = 0; j<10; j++)
-            navires[j][i] = '.';
+        this.navires = new ShipState[10][10];
 
-        this.frappes = new boolean[10][10];
+
+        this.frappes = new Boolean[10][10];
     }
 
 
@@ -107,7 +105,7 @@ public class Board implements IBoard{
                     System.out.print(" " + aux);
                     aux++;
                 }else
-                    System.out.print(navires[y-1][x] + " ");
+                    System.out.print(navires[y-1][x].getShip().getLabel() + " ");
                 
             }
             
@@ -131,7 +129,10 @@ public class Board implements IBoard{
                     aux++;
                 }else{
                     if (frappes[y-1][x]){
-                        System.out.print("X ");
+                        if (this.navires[y-1][x].isStruck()){
+                            System.out.print(ColorUtil.colorize("X ", ColorUtil.Color.RED));
+                        }else
+                            System.out.print(ColorUtil.colorize("X ", ColorUtil.Color.WHITE));
                     }else
                         System.out.print(". ");
                 }
@@ -155,7 +156,7 @@ public class Board implements IBoard{
         switch (ship.getOrientation()) {
             case EAST:
                 for (int i = 0; i < taille; i++){
-                    navires[y-1][x-1+i] = ship.getLabel();
+                    navires[y-1][x-1+i].getShip().setLabel(ship.getLabel());
                 }
                   
                 break;
@@ -163,19 +164,18 @@ public class Board implements IBoard{
             case WEST:
 
                 for (int i = 0; i < taille; i++){
-                    navires[y-1][x-1-i] = ship.getLabel();
+                    navires[y-1][x-1-i].getShip().setLabel(ship.getLabel());
                 }
                    
                 break;
             case SOUTH:
                 for (int i = 0; i < taille; i++){
-                    navires[y-1+i][x-1] = ship.getLabel();
+                    navires[y-1+i][x-1].getShip().setLabel(ship.getLabel());
                 }    
                 break;
             case NORTH:
                 for (int i = 0; i < taille; i++){
-                    navires[y-1-i][x-1] = ship.getLabel();
-                    System.out.println(navires[y-i][x]);
+                    navires[y-1-i][x-1].getShip().setLabel(ship.getLabel());
                 }
                    
                 break;
@@ -184,7 +184,7 @@ public class Board implements IBoard{
     }
 
     public boolean hasShip(int x, int y){
-        if (navires[y-1][x-1] != '.'){
+        if (navires[y-1][x-1].getShip() != null){
             return true;
         }else 
             return false;
@@ -202,7 +202,7 @@ public class Board implements IBoard{
      * 
      */
     public Boolean getHit(int x, int y){
-        if (navires[y-1][x-1] != '.'){
+        if (navires[y-1][x-1].getShip() != null){
             return true;
         }else
             return false;

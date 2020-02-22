@@ -10,6 +10,7 @@ public abstract class AbstractShip {
     protected String nom;
     protected int taille;
     protected Orientation orientation;
+    protected int strikeCount;
 
     /**
      * Mutateur de label
@@ -76,6 +77,24 @@ public abstract class AbstractShip {
     }
 
     /**
+     * Add the strikes in each ship
+     */
+    public void addStrike(){
+        this.strikeCount++;
+    }
+
+    /**
+     * Verify if the ship was sunk or not
+     * @return true if its sunk or false if not
+     */
+    boolean isSunk(){
+        if (this.strikeCount == this.taille){
+            return true;
+        }else   
+            return false;
+    }
+
+    /**
      * Constructeur
      */
      public AbstractShip(Character aLabel, String aNom,int aTaille, Orientation anOrientation){
@@ -83,6 +102,7 @@ public abstract class AbstractShip {
          this.nom = aNom;
          this.taille = aTaille;
          this.orientation = anOrientation;
+         this.strikeCount = 0;
      }
 
 }

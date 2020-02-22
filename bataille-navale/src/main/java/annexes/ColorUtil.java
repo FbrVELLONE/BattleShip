@@ -10,7 +10,7 @@ public class ColorUtil {
     /* ***
      * enum Color interne à la classe ColorUtil
      */
-    enum Color {
+    public enum Color {
         RESET("\u001B[0m"),
         BLACK("\u001B[30m"),
         RED("\u001B[31m"),

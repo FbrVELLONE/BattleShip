@@ -50,7 +50,6 @@ public class Player {
                 ships[i].setOrientation(Orientation.WEST);
             }
             if (res.orientation.equals("n")){
-                System.out.println("im in");
                 ships[i].setOrientation(Orientation.NORTH);
             }
             if (res.orientation.equals("s")){
