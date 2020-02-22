@@ -1,5 +1,7 @@
 package annexes;
 
+import navires.AbstractShip;
+
 public interface IBoard { 
 
     /**

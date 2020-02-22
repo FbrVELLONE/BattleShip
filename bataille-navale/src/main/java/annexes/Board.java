@@ -1,6 +1,6 @@
 package annexes;
 
-public class Board{
+public class Board implements IBoard{
 
     /**
      * Attributs
@@ -76,10 +76,12 @@ public class Board{
         this.navires = new Character[10][10];
         this.frappes = new boolean[10][10];
     }
+
+
+    
     /**
      * montre le deux tableu
      */
-
     public void print(){
         System.out.println("Navires: ");
         System.out.print("  ");
