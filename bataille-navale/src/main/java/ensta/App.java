@@ -23,7 +23,7 @@ public class App
         Destroyer ship_test = new Destroyer(Orientation.NORTH);
         System.out.println(ship_test.getOrientation());
 
-        table.putShip(ship_test, 5, 1);
+        table.putShip(ship_test, 5, 2);
         table.setHit(true, 2, 1);
         table.print();
 
