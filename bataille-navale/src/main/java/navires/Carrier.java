@@ -5,10 +5,10 @@ import annexes.Orientation;
 public class Carrier extends AbstractShip{
 
     public Carrier(){
-        super('C', "Carrier", 4, Orientation.EAST);
+        super('C', "Carrier", 5, Orientation.EAST);
     }
 
     public Carrier(Orientation anOrientation){
-        super('C', "Carrier", 4, anOrientation);
+        super('C', "Carrier", 5, anOrientation);
     }
 } 
