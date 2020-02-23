@@ -17,6 +17,14 @@ public class ShipState {
         return ColorUtil.colorize(this.reference.getLabel().toString(), ColorUtil.Color.RED);
     }
 
+    
+    /**
+     * add Strike
+     */
+    public void addStrike(){
+        reference.addStrike();
+    }
+
     /**
      * Get the ship passed as reference
      * @return the ship
