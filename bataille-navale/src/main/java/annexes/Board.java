@@ -104,8 +104,14 @@ public class Board implements IBoard{
                 if (y == 0){
                     System.out.print(" " + aux);
                     aux++;
-                }else
-                    System.out.print(navires[y-1][x].getShip().getLabel() + " ");
+                }else{
+                    if (navires[y-1][x] == null){
+                        System.out.print(". ");
+                    }
+                    else 
+                        System.out.print(navires[y-1][x].getShip().getLabel() + " ");
+                }
+                    
                 
             }
             
