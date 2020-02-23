@@ -106,10 +106,23 @@ public class Board implements IBoard{
                     aux++;
                 }else{
                     if (navires[y-1][x] == null){
-                        System.out.print(". ");
+                        if(OpponentBoard.getFrappes()[y-1][x] == null)
+                            System.out.print(". ");
+                        else if(OpponentBoard.getFrappes()[y-1][x])
+                            System.out.print(ColorUtil.colorize("o ", ColorUtil.Color.RED));
+                        else
+                            System.out.print(ColorUtil.colorize("o ", ColorUtil.Color.WHITE));
+
                     }
-                    else 
-                        System.out.print(navires[y-1][x].getShip().getLabel() + " ");
+                    else{
+                        if(OpponentBoard.getFrappes()[y-1][x] == null)
+                            System.out.print(navires[y-1][x].getShip().getLabel() + " ");
+                        else if(OpponentBoard.getFrappes()[y-1][x])
+                            System.out.print(ColorUtil.colorize(navires[y-1][x].getShip().getLabel() + " ", ColorUtil.Color.RED));
+                        else
+                            System.out.print(ColorUtil.colorize(navires[y-1][x].getShip().getLabel() + " ", ColorUtil.Color.WHITE));
+                    }
+                         
                 }
                     
                 
