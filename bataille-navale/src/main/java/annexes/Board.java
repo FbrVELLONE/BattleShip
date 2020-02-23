@@ -170,7 +170,7 @@ public class Board implements IBoard{
                             navires[y-1][x-1+i] = new ShipState(ship);
                             navires[y-1][x-1+i].getShip().setLabel(ship.getLabel());
                         }else{
-                            for (;i>=0;i--){
+                            for (;i>0;i--){
                                 navires[y-1][x-1+(i-1)] = null;
                             }
                             throw new ArrayIndexOutOfBoundsException("This position has already been taken by another ship");
@@ -188,7 +188,7 @@ public class Board implements IBoard{
                             navires[y-1][x-1-i] = new ShipState(ship);
                             navires[y-1][x-1-i].getShip().setLabel(ship.getLabel());
                         }else{
-                            for (;i>=0;i--){
+                            for (;i>0;i--){
                                 navires[y-1][x-1-(i-1)] = null;
                             }
                             throw new ArrayIndexOutOfBoundsException("This position has already been taken by another ship");
@@ -205,7 +205,7 @@ public class Board implements IBoard{
                             navires[y-1+i][x-1] = new ShipState(ship);
                             navires[y-1+i][x-1].getShip().setLabel(ship.getLabel());
                         }else{
-                            for (;i>=0;i--){
+                            for (;i>0;i--){
                                 navires[y-1+(i-1)][x-1] = null;
                             }
                             throw new ArrayIndexOutOfBoundsException("This position has already been taken by another ship");
@@ -216,7 +216,7 @@ public class Board implements IBoard{
                 } 
                 break;
             case NORTH:
-                if ( y - taille >= 0){
+                if ( y - taille > 0){
                     for (int i = 0; i < taille; i++){
                         
                         if (navires[y-1-i][x-1] == null){
