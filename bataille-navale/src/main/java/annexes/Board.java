@@ -134,7 +134,7 @@ public class Board implements IBoard{
                     System.out.print(" " + aux);
                     aux++;
                 }else{
-                    if (frappes[y-1][x]){
+                    if (frappes[y-1][x] != null){
                         if (this.navires[y-1][x].isStruck()){
                             System.out.print(ColorUtil.colorize("X ", ColorUtil.Color.RED));
                         }else
@@ -161,36 +161,64 @@ public class Board implements IBoard{
         int taille = ship.getTaille();
         switch (ship.getOrientation()) {
             case EAST:
-                for (int i = 0; i < taille; i++){
-                    navires[y-1][x-1+i].getShip().setLabel(ship.getLabel());
+                if ( x + taille <= navires.length){
+                    for (int i = 0; i < taille; i++){
+                        if (navires[y-1][x-1+i] == null){
+                            navires[y-1][x-1+i].getShip().setLabel(ship.getLabel());
+                        }else{
+                            throw new ArrayIndexOutOfBoundsException("This position has already been taken by another ship");
+                        }
+                    }
+                }else{
+                    throw new ArrayIndexOutOfBoundsException("Ship out of bounds, please enter another position or orientation");
                 }
-                  
                 break;
 
             case WEST:
-
-                for (int i = 0; i < taille; i++){
-                    navires[y-1][x-1-i].getShip().setLabel(ship.getLabel());
-                }
-                   
-                break;
-            case SOUTH:
-                for (int i = 0; i < taille; i++){
-                    navires[y-1+i][x-1].getShip().setLabel(ship.getLabel());
+                if ( x - taille >= 0){
+                    for (int i = 0; i < taille; i++){
+                        if (navires[y-1][x-1-i] == null){
+                            navires[y-1][x-1-i].getShip().setLabel(ship.getLabel());
+                        }else{
+                            throw new ArrayIndexOutOfBoundsException("This position has already been taken by another ship");
+                        }
+                    }
+                }else{
+                    throw new ArrayIndexOutOfBoundsException("Ship out of bounds, please enter another position or orientation");
                 }    
                 break;
+            case SOUTH:
+                if ( y + taille <= navires.length){
+                    for (int i = 0; i < taille; i++){
+                        if (navires[y-1+i][x-1] == null){
+                            navires[y-1+i][x-1].getShip().setLabel(ship.getLabel());
+                        }else{
+                            throw new ArrayIndexOutOfBoundsException("This position has already been taken by another ship");
+                        }
+                    }   
+                }else{
+                    throw new ArrayIndexOutOfBoundsException("Ship out of bounds, please enter another position or orientation");
+                } 
+                break;
             case NORTH:
-                for (int i = 0; i < taille; i++){
-                    navires[y-1-i][x-1].getShip().setLabel(ship.getLabel());
+                if ( y - taille >= 0){
+                    for (int i = 0; i < taille; i++){
+                        
+                        if (navires[y-1-i][x-1] == null){
+                            navires[y-1-i][x-1].getShip().setLabel(ship.getLabel());
+                        }else{
+                            throw new ArrayIndexOutOfBoundsException("This position has already been taken by another ship");
+                        }
+                    }
+                }else{
+                    throw new ArrayIndexOutOfBoundsException("Ship out of bounds, please enter another position or orientation");
                 }
-                   
                 break;
         }
 
     }
-
     public boolean hasShip(int x, int y){
-        if (navires[y-1][x-1].getShip() != null){
+        if (navires[y-1][x-1] != null){
             return true;
         }else 
             return false;
@@ -208,7 +236,7 @@ public class Board implements IBoard{
      * 
      */
     public Boolean getHit(int x, int y){
-        if (navires[y-1][x-1].getShip() != null){
+        if (navires[y-1][x-1].isStruck()){
             return true;
         }else
             return false;
