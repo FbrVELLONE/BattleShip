@@ -92,9 +92,9 @@ public class BattleShipsAI implements Serializable {
                         o = Orientation.SOUTH;
                         break;
                 }
+                s.setOrientation(o);
                
             } while (!canPutShip(s, x, y));
-            s.setOrientation(o);
             board.putShip(s, x, y);
 
         }
@@ -168,22 +168,22 @@ public class BattleShipsAI implements Serializable {
         Orientation o = ship.getOrientation();
         int dx = 0, dy = 0;
         if (o == Orientation.EAST) {
-            if (x + ship.getTaille() >= this.size) {
+            if (x-1 + ship.getTaille() >= this.size) {
                 return false;
             }
             dx = 1;
         } else if (o == Orientation.SOUTH) {
-            if (y + ship.getTaille() >= this.size) {
+            if (y-1 + ship.getTaille() >= this.size) {
                 return false;
             }
             dy = 1;
         } else if (o == Orientation.NORTH) {
-            if (y + 1 - ship.getTaille() < 0) {
+            if (y - ship.getTaille() < 0) {
                 return false;
             }
             dy = -1;
         } else if (o == Orientation.WEST) {
-            if (x + 1 - ship.getTaille() < 0) {
+            if (x - ship.getTaille() < 0) {
                 return false;
             }
             dx = -1;
