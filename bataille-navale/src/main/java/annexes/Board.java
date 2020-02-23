@@ -15,7 +15,7 @@ public class Board implements IBoard{
      * Mutateur de nom
      * @param nom
      */
-    public void setNom(String nom){
+    public void setNom(final String nom){
         this.nom = nom;
     }
 
@@ -23,7 +23,7 @@ public class Board implements IBoard{
      * Mutateur de navires
      * @param navires
      */
-    public void setNavires(ShipState[][] navires){
+    public void setNavires(final ShipState[][] navires){
         this.navires = navires;
     }
 
@@ -31,7 +31,7 @@ public class Board implements IBoard{
      * mutateur de frappes
      * @param frappes
      */
-    public void setFrappes(Boolean[][]frappes){
+    public void setFrappes(final Boolean[][]frappes){
         this.frappes = frappes;
     }
 
@@ -63,7 +63,7 @@ public class Board implements IBoard{
      * @param aNom  le nom du tableau
      * @param taille la taille du tableau
      */
-    public Board(String aNom, int taille){
+    public Board(final String aNom, final int taille){
         this.nom = aNom;
         this.navires = new ShipState[taille][taille];
 
@@ -75,7 +75,7 @@ public class Board implements IBoard{
      * Constructeur qui prend le nom comme argument et donne la taille 10 par default
      * @param aNom
      */
-    public Board(String aNom){
+    public Board(final String aNom){
         this.nom = aNom;
         this.navires = new ShipState[10][10];
 
@@ -160,8 +160,8 @@ public class Board implements IBoard{
     }
 
     
-    public void putShip(AbstractShip ship, int x, int y) throws ArrayIndexOutOfBoundsException{
-        int taille = ship.getTaille();
+    public void putShip(final AbstractShip ship, final int x, final int y) throws ArrayIndexOutOfBoundsException{
+        final int taille = ship.getTaille();
         switch (ship.getOrientation()) {
             case EAST:
                 if ( x + taille <= navires.length){
@@ -236,7 +236,7 @@ public class Board implements IBoard{
         }
 
     }
-    public boolean hasShip(int x, int y){
+    public boolean hasShip(final int x, final int y){
         if (navires[y-1][x-1] != null){
             return true;
         }else 
@@ -244,10 +244,11 @@ public class Board implements IBoard{
         
     }
 
-    public void setHit(boolean hit, int x, int y){
+    public void setHit(final boolean hit, final int x, final int y){
         if (hit){
             this.frappes[y-1][x-1] = true;
-            this.navires[y-1][x-1].addStrike();
+            if (navires[y-1][x-1] != null)
+                this.navires[y-1][x-1].addStrike();
         }else   
             this.frappes[y-1][x-1] = false;
     }
@@ -255,7 +256,7 @@ public class Board implements IBoard{
     /**
      * 
      */
-    public Boolean getHit(int x, int y){
+    public Boolean getHit(final int x, final int y){
         if (navires[y-1][x-1].isStruck()){
             return true;
         }else
