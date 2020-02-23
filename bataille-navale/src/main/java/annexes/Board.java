@@ -139,8 +139,9 @@ public class Board implements IBoard{
                             if (this.navires[y-1][x].isStruck()){
                                 System.out.print(ColorUtil.colorize("X ", ColorUtil.Color.RED));
                             }
-                        }else
+                        }else{
                              System.out.print(ColorUtil.colorize("X ", ColorUtil.Color.WHITE));
+                        }
                     }else
                         System.out.print(". ");
                 }
@@ -169,6 +170,9 @@ public class Board implements IBoard{
                             navires[y-1][x-1+i] = new ShipState(ship);
                             navires[y-1][x-1+i].getShip().setLabel(ship.getLabel());
                         }else{
+                            for (;i>=0;i--){
+                                navires[y-1][x-1+(i-1)] = null;
+                            }
                             throw new ArrayIndexOutOfBoundsException("This position has already been taken by another ship");
                         }
                     }
@@ -184,6 +188,9 @@ public class Board implements IBoard{
                             navires[y-1][x-1-i] = new ShipState(ship);
                             navires[y-1][x-1-i].getShip().setLabel(ship.getLabel());
                         }else{
+                            for (;i>=0;i--){
+                                navires[y-1][x-1-(i-1)] = null;
+                            }
                             throw new ArrayIndexOutOfBoundsException("This position has already been taken by another ship");
                         }
                     }
@@ -198,6 +205,9 @@ public class Board implements IBoard{
                             navires[y-1+i][x-1] = new ShipState(ship);
                             navires[y-1+i][x-1].getShip().setLabel(ship.getLabel());
                         }else{
+                            for (;i>=0;i--){
+                                navires[y-1+(i-1)][x-1] = null;
+                            }
                             throw new ArrayIndexOutOfBoundsException("This position has already been taken by another ship");
                         }
                     }   
@@ -213,6 +223,9 @@ public class Board implements IBoard{
                             navires[y-1-i][x-1] = new ShipState(ship);
                             navires[y-1-i][x-1].getShip().setLabel(ship.getLabel());
                         }else{
+                            for (;i>=0;i--){
+                                navires[y-1-(i-1)][x-1] = null;
+                            }
                             throw new ArrayIndexOutOfBoundsException("This position has already been taken by another ship");
                         }
                     }
@@ -234,6 +247,7 @@ public class Board implements IBoard{
     public void setHit(boolean hit, int x, int y){
         if (hit){
             this.frappes[y-1][x-1] = true;
+            this.navires[y-1][x-1].addStrike();
         }else   
             this.frappes[y-1][x-1] = false;
     }
