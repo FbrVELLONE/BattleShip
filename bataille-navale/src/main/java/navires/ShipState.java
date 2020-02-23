@@ -22,6 +22,7 @@ public class ShipState {
      * add Strike
      */
     public void addStrike(){
+        struck = true;
         reference.addStrike();
     }
 
