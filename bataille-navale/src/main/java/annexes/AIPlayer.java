@@ -3,6 +3,7 @@ package annexes;
 import java.io.Serializable;
 import java.util.List;
 
+import navires.*;
 public class AIPlayer extends Player {
     /*
      * ** Attribut

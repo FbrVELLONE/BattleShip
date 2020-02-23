@@ -19,29 +19,31 @@ public class App
     public static void main( String[] args )
     {
         //test de board
-        Board table = new Board("Test");
-        Board table_2 = new Board("Test_2");
-        table.print(table_2);
+        // Board table = new Board("Test");
+        // Board table_2 = new Board("Test_2");
+        // table.print(table_2);
 
-        Submarine sub = new Submarine();
-        Submarine sub2 = new Submarine();
-        Destroyer dest = new Destroyer();
-        Carrier car = new Carrier();
-        Battleship battle = new Battleship();
+        // Submarine sub = new Submarine();
+        // Submarine sub2 = new Submarine();
+        // Destroyer dest = new Destroyer();
+        // Carrier car = new Carrier();
+        // Battleship battle = new Battleship();
 
-        List<AbstractShip> ships = new ArrayList<AbstractShip>();
-        ships.add(dest);
-        ships.add(sub);
-        ships.add(sub2);
-        ships.add(battle);
-        ships.add(car);
+        // List<AbstractShip> ships = new ArrayList<AbstractShip>();
+        // ships.add(dest);
+        // ships.add(sub);
+        // ships.add(sub2);
+        // ships.add(battle);
+        // ships.add(car);
 
-        Player Cachorra = new Player(table,table_2,ships);
-        Player Cachorra2 = new Player(table_2,table,ships);
+        // Player Cachorra = new Player(table,table_2,ships);
+        // Player Cachorra2 = new Player(table_2,table,ships);
 
-        int[] hitCoords = new int[]{1,1};
-        Cachorra.putShips();
-        Cachorra2.sendHit(hitCoords);    
-        table_2.print(table_2);
+        // int[] hitCoords = new int[]{1,1};
+        // Cachorra.putShips();
+        // Cachorra2.sendHit(hitCoords);    
+        // table_2.print(table_2);
+        TestGame test = new TestGame();
+        test.gameRun();
     }
 }
