@@ -38,6 +38,9 @@ public class App
 
         Cachorra.putShips();
         table.setHit(true, 2, 5);      
+        table.setHit(true, 2, 5);      
+        table.setHit(true, 2, 5);      
+        table.setHit(true, 2, 5);      
         table.print();
     }
 }

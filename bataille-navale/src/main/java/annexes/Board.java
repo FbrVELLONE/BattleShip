@@ -164,7 +164,7 @@ public class Board implements IBoard{
         final int taille = ship.getTaille();
         switch (ship.getOrientation()) {
             case EAST:
-                if ( x + taille <= navires.length){
+                if ( x - 1 + taille <= navires.length){
                     for (int i = 0; i < taille; i++){
                         if (navires[y-1][x-1+i] == null){
                             navires[y-1][x-1+i] = new ShipState(ship);
@@ -199,7 +199,7 @@ public class Board implements IBoard{
                 }    
                 break;
             case SOUTH:
-                if ( y + taille <= navires.length){
+                if ( y - 1 + taille <= navires.length){
                     for (int i = 0; i < taille; i++){
                         if (navires[y-1+i][x-1] == null){
                             navires[y-1+i][x-1] = new ShipState(ship);
@@ -216,7 +216,7 @@ public class Board implements IBoard{
                 } 
                 break;
             case NORTH:
-                if ( y - taille > 0){
+                if ( y + 1 - taille > 0){
                     for (int i = 0; i < taille; i++){
                         
                         if (navires[y-1-i][x-1] == null){
@@ -244,13 +244,23 @@ public class Board implements IBoard{
         
     }
 
-    public void setHit(final boolean hit, final int x, final int y){
-        if (hit){
-            this.frappes[y-1][x-1] = true;
-            if (navires[y-1][x-1] != null)
-                this.navires[y-1][x-1].addStrike();
-        }else   
-            this.frappes[y-1][x-1] = false;
+    public void setHit(final boolean hit, final int x, final int y) throws ArrayIndexOutOfBoundsException{
+       try{ 
+           if (hit){
+                if (this.frappes[y-1][x-1] == null)
+                    this.frappes[y-1][x-1] = false;
+                if (!this.frappes[y-1][x-1]){
+                    this.frappes[y-1][x-1] = true;
+                    if (navires[y-1][x-1] != null)
+                        this.navires[y-1][x-1].addStrike();
+                }else{
+                    throw new ArrayIndexOutOfBoundsException("Ship has already been hit in this position");
+                }
+            }else   
+                this.frappes[y-1][x-1] = false;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
