@@ -164,6 +164,7 @@ public class Board implements IBoard{
                 if ( x + taille <= navires.length){
                     for (int i = 0; i < taille; i++){
                         if (navires[y-1][x-1+i] == null){
+                            navires[y-1][x-1+i] = new ShipState(ship);
                             navires[y-1][x-1+i].getShip().setLabel(ship.getLabel());
                         }else{
                             throw new ArrayIndexOutOfBoundsException("This position has already been taken by another ship");
@@ -178,6 +179,7 @@ public class Board implements IBoard{
                 if ( x - taille >= 0){
                     for (int i = 0; i < taille; i++){
                         if (navires[y-1][x-1-i] == null){
+                            navires[y-1][x-1-i] = new ShipState(ship);
                             navires[y-1][x-1-i].getShip().setLabel(ship.getLabel());
                         }else{
                             throw new ArrayIndexOutOfBoundsException("This position has already been taken by another ship");
@@ -191,6 +193,7 @@ public class Board implements IBoard{
                 if ( y + taille <= navires.length){
                     for (int i = 0; i < taille; i++){
                         if (navires[y-1+i][x-1] == null){
+                            navires[y-1+i][x-1] = new ShipState(ship);
                             navires[y-1+i][x-1].getShip().setLabel(ship.getLabel());
                         }else{
                             throw new ArrayIndexOutOfBoundsException("This position has already been taken by another ship");
@@ -205,6 +208,7 @@ public class Board implements IBoard{
                     for (int i = 0; i < taille; i++){
                         
                         if (navires[y-1-i][x-1] == null){
+                            navires[y-1-i][x-1] = new ShipState(ship);
                             navires[y-1-i][x-1].getShip().setLabel(ship.getLabel());
                         }else{
                             throw new ArrayIndexOutOfBoundsException("This position has already been taken by another ship");

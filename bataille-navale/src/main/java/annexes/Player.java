@@ -63,7 +63,7 @@ public class Player {
                 ++i;
                 
             } catch(IndexOutOfBoundsException e){
-                System.out.println("Ship out of bounds, please enter another position");
+                System.out.println(e.getMessage());
             }
             
             // TODO when ship placement successful
