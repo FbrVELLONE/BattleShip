@@ -41,7 +41,8 @@ public class Player {
             String msg = String.format("placer %d : %s(%d)", i + 1, s.getNom(), s.getTaille());
             System.out.println(msg);
             InputHelper.ShipInput res = InputHelper.readShipInput();
-            // TODO set ship orientation
+
+
             System.out.println(res.orientation);
             if (res.orientation.equals("e")){
                 ships[i].setOrientation(Orientation.EAST);
@@ -56,17 +57,13 @@ public class Player {
                 ships[i].setOrientation(Orientation.SOUTH);
             }
 
-            
-            // TODO put ship at given position
             try{
                 board.putShip(ships[i], res.x, res.y);
-                ++i;
-                
+                ++i;   
             } catch(IndexOutOfBoundsException e){
                 System.out.println(e.getMessage());
             }
             
-            // TODO when ship placement successful
             
             
             
