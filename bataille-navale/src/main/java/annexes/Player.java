@@ -34,7 +34,7 @@ public class Player {
         boolean done = false;
         int i = 0;
 
-
+        
         do {
             AbstractShip s = ships[i];
 
@@ -71,23 +71,51 @@ public class Player {
             
             
             done = i == 5;
-            board.print();
+            board.print(opponentBoard);
         } while (!done);
     }
 
     public Hit sendHit(int[] coords) {
-        boolean done;
+        boolean done = false;
         Hit hit = null;
-
+        
+        
+        
         do {
-            System.out.println("où frapper?");
-            InputHelper.CoordInput hitInput = InputHelper.readCoordInput();
-            // TODO call sendHit on this.opponentBoard
-            done = false;
-            // TODO : Game expects sendHit to return BOTH hit result & hit coords.
-            // return hit is obvious. But how to return coords at the same time ?
-        } while (!done);
+            try {
+                System.out.println("où frapper?");
+                InputHelper.CoordInput hitInput = InputHelper.readCoordInput();
+    
+                coords[0] = hitInput.x;
+                coords[1] = hitInput.y;
 
+                if (board.getFrappes()[coords[0]][coords[1]] != null){
+                    System.out.println("im in");
+                    throw new Exception("You have already shot here");
+                }
+
+                hit = this.opponentBoard.sendHit(coords[0], coords[1]);
+                System.out.println(hit);
+
+                if(hit != Hit.MISS){
+                    this.board.setHit(true, coords[0], coords[1]);
+                    done = false;
+                }else{
+                    this.board.setHit(false, coords[0], coords[1]);
+                    done = true;
+                }
+
+                board.print(opponentBoard);
+
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+                
+            } while (!done);
+
+    
+            
+            
         return hit;
     }
 

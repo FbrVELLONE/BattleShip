@@ -22,8 +22,13 @@ public class ShipState {
      * add Strike
      */
     public void addStrike(){
+        if (!this.struck){
+            this.reference.addStrike();
+        }
+        else{
+            System.out.println("Ship has already been hit in this position");
+        }
         this.struck = true;
-        this.reference.addStrike();
     }
 
     /**

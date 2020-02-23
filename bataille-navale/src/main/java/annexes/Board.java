@@ -88,7 +88,7 @@ public class Board implements IBoard{
     /**
      * montre le deux tableu
      */
-    public void print(){
+    public void print(Board OpponentBoard){
         System.out.println("Navires: ");
         System.out.print("  ");
         char aux = 65;
@@ -135,15 +135,13 @@ public class Board implements IBoard{
                     aux++;
                 }else{
                     if (frappes[y-1][x] != null){
-                        if (this.navires[y-1][x] != null){
-                            if (this.navires[y-1][x].isStruck()){
-                                System.out.print(ColorUtil.colorize("X ", ColorUtil.Color.RED));
-                            }
-                        }else{
-                             System.out.print(ColorUtil.colorize("X ", ColorUtil.Color.WHITE));
+                        if(frappes[y-1][x]){
+                            System.out.print(ColorUtil.colorize("X ", ColorUtil.Color.RED));
+                        } else{
+                            System.out.print(ColorUtil.colorize("X ", ColorUtil.Color.WHITE));
                         }
                     }else
-                        System.out.print(". ");
+                        System.out.print(". ");      
                 }
                     
                 
@@ -244,23 +242,10 @@ public class Board implements IBoard{
         
     }
 
-    public void setHit(final boolean hit, final int x, final int y) throws ArrayIndexOutOfBoundsException{
-       try{ 
-           if (hit){
-                if (this.frappes[y-1][x-1] == null)
-                    this.frappes[y-1][x-1] = false;
-                if (!this.frappes[y-1][x-1]){
-                    this.frappes[y-1][x-1] = true;
-                    if (navires[y-1][x-1] != null)
-                        this.navires[y-1][x-1].addStrike();
-                }else{
-                    throw new ArrayIndexOutOfBoundsException("Ship has already been hit in this position");
-                }
-            }else   
-                this.frappes[y-1][x-1] = false;
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-        }
+    public void setHit(final boolean hit, final int x, final int y){   
+
+        this.frappes[y-1][x-1] = hit;
+
     }
 
     /**
@@ -271,5 +256,22 @@ public class Board implements IBoard{
             return true;
         }else
             return false;
+    }
+    
+    public Hit sendHit(int x, int y) {
+        
+        if (navires[y-1][x-1] != null){
+            this.navires[y-1][x-1].addStrike();
+            if (navires[y-1][x-1].isSunk()){
+                return Hit.fromInt(navires[y-1][x-1].getShip().getTaille());
+            }
+            if (navires[y-1][x-1].isStruck()){
+                return Hit.STRIKE;
+            }else{
+                return Hit.MISS;
+            }
+        }else{
+            return Hit.MISS;
+        }
     }
 }

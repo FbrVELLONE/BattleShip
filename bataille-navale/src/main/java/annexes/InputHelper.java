@@ -70,8 +70,8 @@ public final class InputHelper {
         do {
             try {
                 String coord = sin.nextLine().toLowerCase();
-                res.x = coord.charAt(0) - 'a';
-                res.y = Integer.parseInt(coord.substring(1, coord.length())) - 1;
+                res.x = coord.charAt(0) - 'a'+1;
+                res.y = Integer.parseInt(coord.substring(1, coord.length()));
                 done = true;
             } catch (Exception e) {
                 // nop
