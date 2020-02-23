@@ -41,21 +41,18 @@ public class TestGame {
         tShips.add(tBattle);
 
         this.tShipsAI = new BattleShipsAI(board, board);
+        tShipsAI.putShips(tShips.toArray(new AbstractShip[tShips.size()]));
     }
 
     public void gameRun(){
         do {
-            Random rnd = new Random(); 
-            int x = rnd.nextInt(9) + 1;
-            int y = rnd.nextInt(9) + 1;
+            int[] hitCoords = new int[2];
+            tShipsAI.sendHit(hitCoords);
+            if (board.getNavires()[hitCoords[1] -1][hitCoords[0] - 1] != null)
+                if(board.getNavires()[hitCoords[1] -1][hitCoords[0] - 1].isSunk()){
+                    compteurNavires++;
+                }
             
-            tShipsAI.putShips(tShips.toArray(new AbstractShip[tShips.size()]));
-            tShipsAI.sendHit(new int[]{x,y});
-            System.out.println("here");
-            if(board.getNavires()[y][x].isSunk()){
-                compteurNavires++;
-            }
-            System.out.println("here 2");
             board.print(board);
         } while (compteurNavires != 5);
     }

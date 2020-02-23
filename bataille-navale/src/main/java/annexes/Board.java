@@ -252,12 +252,7 @@ public class Board implements IBoard{
      * 
      */
     public Boolean getHit(final int x, final int y){
-        if (navires[y-1][x-1] == null)
-            return false;
-        if (navires[y-1][x-1].isStruck()){
-            return true;
-        }else
-            return false;
+        return this.frappes[y-1][x-1];
     }
     
     public Hit sendHit(int x, int y) {

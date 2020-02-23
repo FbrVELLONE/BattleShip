@@ -63,7 +63,7 @@ public class BattleShipsAI implements Serializable {
      */
     public void putShips(AbstractShip ships[]) {
         int x, y;
-        Orientation o;
+        Orientation o = null;
         Random rnd = new Random();
         // Orientation[] orientations = Orientation.values();
 
@@ -71,10 +71,11 @@ public class BattleShipsAI implements Serializable {
             do {
                 // TODO use Random to pick a random x, y & orientation
 
-                x = rnd.nextInt(9) + 1;
-                y = rnd.nextInt(9) + 1;
-
-                switch (rnd.nextInt(3)) {
+                x = rnd.nextInt(10) + 1;
+                y = rnd.nextInt(10) + 1;
+                
+                int sCase = rnd.nextInt(4);
+                switch (sCase) {
                     case 0:
                         o = Orientation.EAST;
                         break;
@@ -91,8 +92,11 @@ public class BattleShipsAI implements Serializable {
                         o = Orientation.SOUTH;
                         break;
                 }
+               
             } while (!canPutShip(s, x, y));
+            s.setOrientation(o);
             board.putShip(s, x, y);
+
         }
     }
 
@@ -102,12 +106,13 @@ public class BattleShipsAI implements Serializable {
      * @return the status of the hit.
      */
     public Hit sendHit(int[] coords) {
-        int res[] = null;
+        
+        int res[] = null;  
+        
         if (coords == null || coords.length < 2) {
             throw new IllegalArgumentException("must provide an initialized array of size 2");
         }
 
-        System.out.print("here");
         // already found strike & orientation?
         if (lastVertical != null) {
             if (lastVertical) {
@@ -212,8 +217,8 @@ public class BattleShipsAI implements Serializable {
         int y;
 
         do {
-            x = rnd.nextInt(size);
-            y = rnd.nextInt(size);
+            x = rnd.nextInt(size) + 1;
+            y = rnd.nextInt(size) + 1;
         } while (!isUndiscovered(x, y));
 
         return new int[] { x, y };
