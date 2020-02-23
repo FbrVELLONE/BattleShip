@@ -36,7 +36,8 @@ public class App
         ships.add(car);
         Player Cachorra = new Player(table,table_2,ships);
 
-        Cachorra.putShips();
-        
+        //Cachorra.putShips();
+        table.setHit(true, 2, 5);      
+        table.print();
     }
 }

@@ -135,10 +135,12 @@ public class Board implements IBoard{
                     aux++;
                 }else{
                     if (frappes[y-1][x] != null){
-                        if (this.navires[y-1][x].isStruck()){
-                            System.out.print(ColorUtil.colorize("X ", ColorUtil.Color.RED));
+                        if (this.navires[y-1][x] != null){
+                            if (this.navires[y-1][x].isStruck()){
+                                System.out.print(ColorUtil.colorize("X ", ColorUtil.Color.RED));
+                            }
                         }else
-                            System.out.print(ColorUtil.colorize("X ", ColorUtil.Color.WHITE));
+                             System.out.print(ColorUtil.colorize("X ", ColorUtil.Color.WHITE));
                     }else
                         System.out.print(". ");
                 }
