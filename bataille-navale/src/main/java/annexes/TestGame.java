@@ -3,7 +3,6 @@ package annexes;
 import navires.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * TestGame
@@ -50,7 +49,7 @@ public class TestGame {
             tShipsAI.sendHit(hitCoords);
             if (board.getNavires()[hitCoords[1] -1][hitCoords[0] - 1] != null)
                 if(board.getNavires()[hitCoords[1] -1][hitCoords[0] - 1].isSunk()){
-                    compteurNavires++;
+                    ++compteurNavires;
                 }
             
             board.print(board);

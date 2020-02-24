@@ -87,7 +87,7 @@ public abstract class AbstractShip {
      * Verify if the ship was sunk or not
      * @return true if its sunk or false if not
      */
-    boolean isSunk(){
+    public boolean isSunk(){
         if (this.strikeCount == this.taille){
             return true;
         }else   

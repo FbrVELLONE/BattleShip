@@ -13,6 +13,7 @@ public class Player {
     protected int destroyedCount;
     protected AbstractShip[] ships;
     protected boolean lose;
+    protected String name;
 
     /* **
      * Constructeur
@@ -21,6 +22,15 @@ public class Player {
         this.board = board;
         this.ships = ships.toArray(new AbstractShip[0]);
         this.opponentBoard = opponentBoard;
+    }
+    /* **
+     * Constructeur2
+     */
+    public Player(Board board, Board opponentBoard, List<AbstractShip> ships, String nom) {
+        this.board = board;
+        this.ships = ships.toArray(new AbstractShip[0]);
+        this.opponentBoard = opponentBoard;
+        this.name = nom;
     }
 
     /* **
@@ -73,11 +83,9 @@ public class Player {
     }
 
     public Hit sendHit(int[] coords) {
-        boolean done = false;
+        boolean done = true;
         Hit hit = null;
-        
-        
-        
+
         do {
             try {
                 System.out.println("où frapper?");
@@ -85,34 +93,30 @@ public class Player {
     
                 coords[0] = hitInput.x;
                 coords[1] = hitInput.y;
-
-                if (board.getFrappes()[coords[0]][coords[1]] != null){
-                    System.out.println("im in");
+                    System.out.println("cord0; " + coords[0] + " coord1: " + coords[1]);
+                    System.out.println(board.getFrappes()[coords[0] - 1][coords[1] - 1]);
+                if (board.getFrappes()[coords[0] - 1][coords[1] - 1] != null){
                     throw new Exception("You have already shot here");
                 }
 
                 hit = this.opponentBoard.sendHit(coords[0], coords[1]);
-                System.out.println(hit);
 
                 if(hit != Hit.MISS){
                     this.board.setHit(true, coords[0], coords[1]);
-                    done = false;
+                    // done = false;
                 }else{
                     this.board.setHit(false, coords[0], coords[1]);
-                    done = true;
+                    // done = true;
                 }
 
-                board.print(opponentBoard);
+                // board.print(opponentBoard);
 
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                System.out.println(e.getMessage() + "penis");
             }
                 
-            } while (!done);
-
-    
-            
-            
+        } while (!done);
+   
         return hit;
     }
 
@@ -122,5 +126,17 @@ public class Player {
 
     public void setShips(AbstractShip[] ships) {
         this.ships = ships;
+    }
+
+    public void setName(String nom){
+        this.name = nom;
+    }
+
+    public void setDestroyedCount(int count){
+        this.destroyedCount = count;
+    }
+
+    public int getDestroyedCount(){
+        return this.destroyedCount;
     }
 }

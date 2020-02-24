@@ -111,7 +111,7 @@ public class Board implements IBoard{
                         else if(OpponentBoard.getFrappes()[y-1][x])
                             System.out.print(ColorUtil.colorize("o ", ColorUtil.Color.RED));
                         else
-                            System.out.print(ColorUtil.colorize("o ", ColorUtil.Color.WHITE));
+                            System.out.print(ColorUtil.colorize("o ", ColorUtil.Color.YELLOW));
 
                     }
                     else{
@@ -120,7 +120,7 @@ public class Board implements IBoard{
                         else if(OpponentBoard.getFrappes()[y-1][x])
                             System.out.print(ColorUtil.colorize(navires[y-1][x].getShip().getLabel() + " ", ColorUtil.Color.RED));
                         else
-                            System.out.print(ColorUtil.colorize(navires[y-1][x].getShip().getLabel() + " ", ColorUtil.Color.WHITE));
+                            System.out.print(ColorUtil.colorize(navires[y-1][x].getShip().getLabel() + " ", ColorUtil.Color.GREEN));
                     }
                          
                 }
