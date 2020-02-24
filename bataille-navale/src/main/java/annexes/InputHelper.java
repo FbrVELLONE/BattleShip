@@ -30,6 +30,10 @@ public final class InputHelper {
     /* **
      * Méthodes de la classe InputHelper
      */
+    /**
+     * Returns the information needed to allocate the vessel according to the ShipInput abstraction layer created
+     * @return The ship
+     */
     public static ShipInput readShipInput() {
         @SuppressWarnings("resource")
         Scanner sin = new Scanner(System.in);
@@ -61,6 +65,10 @@ public final class InputHelper {
         return res;
     }
 
+    /**
+     * Read the entry coordinates
+     * @return Returns your values
+     */
     public static CoordInput readCoordInput() {
         @SuppressWarnings("resource")
         Scanner sin = new Scanner(System.in);

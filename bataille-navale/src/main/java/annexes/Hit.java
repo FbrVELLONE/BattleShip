@@ -2,6 +2,9 @@ package annexes;
 
 import java.util.NoSuchElementException;
 
+/**
+ * Enum used to guide and make the relationship of the shots given by users during the game
+ */
 public enum Hit {
     MISS(-1, "manqué"),
     STRIKE(-2, "touché"),
@@ -36,6 +39,9 @@ public enum Hit {
         throw new NoSuchElementException("no enum for value " + value);
     }
 
+        /**
+         * Returns the state label
+         */
     public String toString() {
         return this.label;
     }

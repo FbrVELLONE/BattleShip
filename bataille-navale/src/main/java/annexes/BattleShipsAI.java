@@ -42,7 +42,7 @@ public class BattleShipsAI implements Serializable {
      */
 
     /**
-     *
+     * Constructor
      * @param myBoard       board where ships will be put.
      * @param opponentBoard Opponent's board, where hits will be sent.
      */
@@ -65,12 +65,9 @@ public class BattleShipsAI implements Serializable {
         int x, y;
         Orientation o = null;
         Random rnd = new Random();
-        // Orientation[] orientations = Orientation.values();
 
         for (AbstractShip s : ships) {
             do {
-                // TODO use Random to pick a random x, y & orientation
-
                 x = rnd.nextInt(10) + 1;
                 y = rnd.nextInt(10) + 1;
                 
@@ -101,7 +98,7 @@ public class BattleShipsAI implements Serializable {
     }
 
     /**
-     *
+     * Send the AI's hit to the game board, checking whether or not there are boats
      * @param coords array must be of size 2. Will hold the coord of the send hit.
      * @return the status of the hit.
      */
@@ -113,7 +110,6 @@ public class BattleShipsAI implements Serializable {
             throw new IllegalArgumentException("must provide an initialized array of size 2");
         }
 
-        // already found strike & orientation?
         if (lastVertical != null) {
             if (lastVertical) {
                 res = pickVCoord();
@@ -122,19 +118,15 @@ public class BattleShipsAI implements Serializable {
             }
 
             if (res == null) {
-                // no suitable coord found... forget last strike.
                 lastStrike = null;
                 lastVertical = null;
             }
         } else if (lastStrike != null) {
-            // if already found a strike, without orientation
-            // try to guess orientation
             res = pickVCoord();
             if (res == null) {
                 res = pickHCoord();
             }
             if (res == null) {
-                // no suitable coord found... forget last strike.
                 lastStrike = null;
             }
         }
@@ -163,6 +155,13 @@ public class BattleShipsAI implements Serializable {
      * *** Méthodes privées
      */
 
+    /**
+     * Checks if it is possible to allocate the boat to the desired place
+     * @param ship Target boat in positioning
+     * @param x coord x
+     * @param y coord y
+     * @return True to possible positioning and false to impossible
+     */    
     private boolean canPutShip(AbstractShip ship, int x, int y) {
         Orientation o = ship.getOrientation();
         int dx = 0, dy = 0;
@@ -202,14 +201,30 @@ public class BattleShipsAI implements Serializable {
         return true;
     }
 
+    /**
+     * Seeks to provide guidance
+     * @param c1
+     * @param c2
+     * @return
+     */
     private boolean guessOrientation(int[] c1, int[] c2) {
         return c1[0] == c2[0];
     }
 
+    /**
+     * Whether or not the ship was hit
+     * @param x
+     * @param y
+     * @return
+     */
     private boolean isUndiscovered(int x, int y) {
         return x > 0 && x <= size && y > 0 && y <= size && board.getHit(x, y) == null;
     }
 
+    /**
+     * Select random coordinates
+     * @return the coords
+     */
     private int[] pickRandomCoord() {
         Random rnd = new Random();
         int x;
