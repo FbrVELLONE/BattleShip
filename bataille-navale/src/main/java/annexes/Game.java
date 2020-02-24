@@ -107,10 +107,8 @@ public class Game {
                     }
                 
             System.out.println(player1.name);
-            b1.print(player2.board);
             System.out.println("");
-            System.out.println(player2.name);
-            b2.print(player1.board);
+            b1.print(player2.board);
         } while (!done);
 
         SAVE_FILE.delete();

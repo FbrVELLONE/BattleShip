@@ -94,14 +94,11 @@ public class Player {
 
         do {
 
-<<<<<<< HEAD
                 System.out.println("où frapper?");
                 InputHelper.CoordInput hitInput = InputHelper.readCoordInput();
     
                 coords[0] = hitInput.x;
                 coords[1] = hitInput.y;
-                    System.out.println("cord0; " + coords[0] + " coord1: " + coords[1]);
-                    System.out.println(board.getFrappes()[coords[0] - 1][coords[1] - 1]);
                 if (board.getFrappes()[coords[1] - 1][coords[0] - 1] != null){
                     throw new Exception("You have already shot here");
                 }
@@ -110,34 +107,10 @@ public class Player {
 
                 if(hit != Hit.MISS){
                     this.board.setHit(true, coords[0], coords[1]);
-                    // done = false;
                 }else{
                     this.board.setHit(false, coords[0], coords[1]);
-                    // done = true;
                 }
 
-                // board.print(opponentBoard);
-=======
-            System.out.println("où frapper?");
-            InputHelper.CoordInput hitInput = InputHelper.readCoordInput();
-
-            coords[0] = hitInput.x;
-            coords[1] = hitInput.y;
-
-            if (board.getFrappes()[coords[0] - 1][coords[1] - 1] != null){
-                throw new Exception("You have already shot here");
-            }
-            
-            hit = this.opponentBoard.sendHit(coords[0], coords[1]);
-            System.out.println(hit);
-
-            if(hit != Hit.MISS){
-                this.board.setHit(true, coords[0], coords[1]);
-            }else{
-                this.board.setHit(false, coords[0], coords[1]);
-            }
-
->>>>>>> Comentaires
         } while (!done);
    
         return hit;
