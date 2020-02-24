@@ -183,6 +183,9 @@ public class Board implements IBoard{
 
     /**
      * You are in charge of allocating the position of the ships on the board, checking whether or not it is possible to place it
+     * @param ship the ship you are going to position
+     * @param x  horizontal coordenate
+     * @param y vertical coordenate
      */
     public void putShip(final AbstractShip ship, final int x, final int y) throws ArrayIndexOutOfBoundsException{
         final int taille = ship.getTaille();
@@ -263,6 +266,8 @@ public class Board implements IBoard{
 
     /**
      * Check if there is a ship in this desired position
+     * @param x horizontal coordenate
+     * @param y vertical coordenate
      */
     public boolean hasShip(final int x, final int y){
         if (navires[y-1][x-1] != null){
@@ -274,6 +279,9 @@ public class Board implements IBoard{
 
     /**
      * Allocates Hit's status on the board
+     * @param hit State of the hit
+     * @param x horizontal coordenate
+     * @param y vertical coordenate
      */
     public void setHit(final boolean hit, final int x, final int y){   
 
@@ -282,7 +290,10 @@ public class Board implements IBoard{
     }
 
     /**
-     * Recover Hit's status on the board
+     * Recover Hit's status on a board position
+     * @param x horizontal coordenate
+     * @param y vertical coordenate
+     * @return Status of the hit in that position
      */
     public Boolean getHit(final int x, final int y){
         return this.frappes[y-1][x-1];
