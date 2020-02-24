@@ -82,12 +82,12 @@ public class Player {
         } while (!done);
     }
 
-    public Hit sendHit(int[] coords) {
+    public Hit sendHit(int[] coords) throws Exception{
         boolean done = true;
         Hit hit = null;
 
         do {
-            try {
+
                 System.out.println("où frapper?");
                 InputHelper.CoordInput hitInput = InputHelper.readCoordInput();
     
@@ -110,11 +110,6 @@ public class Player {
                 }
 
                 // board.print(opponentBoard);
-
-            } catch (Exception e) {
-                System.out.println(e.getMessage() + "penis");
-            }
-                
         } while (!done);
    
         return hit;

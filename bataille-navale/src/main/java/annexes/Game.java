@@ -33,38 +33,20 @@ public class Game {
             
             // TODO use a scanner to read player name
             sin = new Scanner(System.in);
-            
+            String playerName = sin.nextLine();
             // TODO init boards
             Board b1, b2;
-            b1 = new Board(sin.nextLine());
+            b1 = new Board(playerName);
             b2 = new Board("AI");
             
             // TODO init this.player1 & this.player2
             List<AbstractShip> ships_p1 = new ArrayList<AbstractShip>();
-            Submarine sub_p1 = new Submarine();
-            Submarine sub2_p1 = new Submarine();
-            Destroyer dest_p1 = new Destroyer();
-            Carrier car_p1 = new Carrier();
-            Battleship battle_p1 = new Battleship();
-            ships_p1.add(dest_p1);
-            ships_p1.add(sub_p1);
-            ships_p1.add(sub2_p1);
-            ships_p1.add(battle_p1);
-            ships_p1.add(car_p1);
+            ships_p1 = createDefaultShips();
             
-            this.player1 = new Player(b1, b2, ships_p1, "Alo");
+            this.player1 = new Player(b1, b2, ships_p1, playerName);
             
             List<AbstractShip> ships_p2 = new ArrayList<AbstractShip>();
-            Submarine sub_p2 = new Submarine();
-            Submarine sub2_p2 = new Submarine();
-            Destroyer dest_p2 = new Destroyer();
-            Carrier car_p2 = new Carrier();
-            Battleship battle_p2 = new Battleship();
-            ships_p2.add(dest_p2);
-            ships_p2.add(sub_p2);
-            ships_p2.add(sub2_p2);
-            ships_p2.add(battle_p2);
-            ships_p2.add(car_p2);
+            ships_p2 = createDefaultShips();
             
             this.player2 = new AIPlayer(b2, b1, ships_p2, "AI");
             
@@ -89,8 +71,9 @@ public class Game {
 
         // main loop
         b1.print(player2.board);
-        boolean done;
+        boolean done = false;
         do {
+            try{
 
                 hit = player1.sendHit(coords); // TODO player1 send a hit  
                 boolean strike = hit != Hit.MISS && hit != null; // TODO set this hit on his board (b1)
@@ -116,9 +99,13 @@ public class Game {
                         }
                     }while (strike && !done);
                 }
+                }catch(Exception e){
+                        System.out.println(e.getMessage());
+                    }
                 
             System.out.println(player1.name);
             b1.print(player2.board);
+            System.out.println("");
             System.out.println(player2.name);
             b2.print(player1.board);
         } while (!done);
