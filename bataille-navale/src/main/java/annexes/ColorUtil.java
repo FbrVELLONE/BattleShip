@@ -37,10 +37,22 @@ public class ColorUtil {
     /* ***
      * Méthodes de la classe ColorUtil
      */
+    /**
+     * Add color to text
+     * @param text
+     * @param color
+     * @return
+     */
     public static String colorize(String text, Color color) {
         return String.format("%s%s%s", color.value, text, Color.RESET.value);
     }
 
+    /**
+     * Add color to the Character
+     * @param text
+     * @param color
+     * @return
+     */
     public static String colorize(Character text, Color color) {
         return colorize("" + text, color);
     }

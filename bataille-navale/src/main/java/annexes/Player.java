@@ -82,55 +82,77 @@ public class Player {
         } while (!done);
     }
 
+        /**
+         * Recovers the status of the shots according to the player's ship allocation tables
+         * @param coords Target coordinates required 
+         * @return shooting status
+         * @throws Exception Corrects necessary errors according to the limits or overlapping shots of the use
+         */
     public Hit sendHit(int[] coords) throws Exception{
         boolean done = true;
         Hit hit = null;
 
         do {
 
-                System.out.println("où frapper?");
-                InputHelper.CoordInput hitInput = InputHelper.readCoordInput();
-    
-                coords[0] = hitInput.x;
-                coords[1] = hitInput.y;
-                    System.out.println("cord0; " + coords[0] + " coord1: " + coords[1]);
-                    System.out.println(board.getFrappes()[coords[0] - 1][coords[1] - 1]);
-                if (board.getFrappes()[coords[0] - 1][coords[1] - 1] != null){
-                    throw new Exception("You have already shot here");
-                }
+            System.out.println("où frapper?");
+            InputHelper.CoordInput hitInput = InputHelper.readCoordInput();
 
-                hit = this.opponentBoard.sendHit(coords[0], coords[1]);
+            coords[0] = hitInput.x;
+            coords[1] = hitInput.y;
 
-                if(hit != Hit.MISS){
-                    this.board.setHit(true, coords[0], coords[1]);
-                    // done = false;
-                }else{
-                    this.board.setHit(false, coords[0], coords[1]);
-                    // done = true;
-                }
+            if (board.getFrappes()[coords[0] - 1][coords[1] - 1] != null){
+                throw new Exception("You have already shot here");
+            }
+            
+            hit = this.opponentBoard.sendHit(coords[0], coords[1]);
+            System.out.println(hit);
 
-                // board.print(opponentBoard);
+            if(hit != Hit.MISS){
+                this.board.setHit(true, coords[0], coords[1]);
+            }else{
+                this.board.setHit(false, coords[0], coords[1]);
+            }
+
         } while (!done);
    
         return hit;
     }
 
+    /**
+     * Returns all ships
+     */
     public AbstractShip[] getShips() {
         return ships;
     }
 
+    /**
+     * Place the required ship.
+     * @param ships
+     */
     public void setShips(AbstractShip[] ships) {
         this.ships = ships;
     }
 
+    /**
+     * Set player name
+     * @param nom
+     */
     public void setName(String nom){
         this.name = nom;
     }
 
+        /**
+         * Set the counter of sunk ships
+         * @param count
+         */
     public void setDestroyedCount(int count){
         this.destroyedCount = count;
     }
 
+    /**
+     * Recovers the value of sunken ships
+     * @return
+     */
     public int getDestroyedCount(){
         return this.destroyedCount;
     }

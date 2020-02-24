@@ -7,8 +7,17 @@ public class Board implements IBoard{
     /**
      * Attributs
      */
+    /**
+     * Name of the Board's game
+     */
     private String nom;
+    /**
+     * Status of player's ships and hits received
+     */
     private ShipState[][] navires;
+    /**
+     * Status of executed hits
+     */
     private Boolean[][] frappes;
 
     /**
@@ -86,7 +95,7 @@ public class Board implements IBoard{
 
     
     /**
-     * montre le deux tableu
+     * Print out the game board, checking all shooting conditions and player hit conditions
      */
     public void print(Board OpponentBoard){
         System.out.println("Navires: ");
@@ -165,12 +174,16 @@ public class Board implements IBoard{
     }
 
 
-
+    /**
+     * Get the ships size
+     */
     public int getSize(){
         return this.navires.length;
     }
 
-    
+    /**
+     * You are in charge of allocating the position of the ships on the board, checking whether or not it is possible to place it
+     */
     public void putShip(final AbstractShip ship, final int x, final int y) throws ArrayIndexOutOfBoundsException{
         final int taille = ship.getTaille();
         switch (ship.getOrientation()) {
@@ -247,6 +260,10 @@ public class Board implements IBoard{
         }
 
     }
+
+    /**
+     * Check if there is a ship in this desired position
+     */
     public boolean hasShip(final int x, final int y){
         if (navires[y-1][x-1] != null){
             return true;
@@ -255,6 +272,9 @@ public class Board implements IBoard{
         
     }
 
+    /**
+     * Allocates Hit's status on the board
+     */
     public void setHit(final boolean hit, final int x, final int y){   
 
         this.frappes[y-1][x-1] = hit;
@@ -262,12 +282,15 @@ public class Board implements IBoard{
     }
 
     /**
-     * 
+     * Recover Hit's status on the board
      */
     public Boolean getHit(final int x, final int y){
         return this.frappes[y-1][x-1];
     }
     
+    /**
+     * Recovers the status of the hit according to the allocation of ships on the board
+     */
     public Hit sendHit(int x, int y) {
         
         if (navires[y-1][x-1] != null){

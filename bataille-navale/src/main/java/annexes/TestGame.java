@@ -5,22 +5,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * TestGame
+ * TestGame for testing the AI of game
  */
 public class TestGame {
+    /**
+     * Common board
+     */
     Board board;
+    /**
+     * Sunken ship counter
+     */
     int compteurNavires;
 
+    /**
+     * List of ships
+     */
     Submarine tSub;
     Submarine tSub2;
     Destroyer tDest;
     Carrier tCar;
     Battleship tBattle;
-
     List<AbstractShip> tShips;
 
+    /**
+     * AI player instance
+     */
     BattleShipsAI tShipsAI;
 
+    /**
+     * Constructor
+     */
     public TestGame(){
         this.board = new Board("Test");
         this.board.print(board);
@@ -43,6 +57,9 @@ public class TestGame {
         tShipsAI.putShips(tShips.toArray(new AbstractShip[tShips.size()]));
     }
 
+        /**
+         * Initialize the tests
+         */
     public void gameRun(){
         do {
             int[] hitCoords = new int[2];

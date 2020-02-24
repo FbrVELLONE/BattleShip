@@ -10,12 +10,12 @@ import navires.*;
 public class Game {
 
     /*
-     * *** Constante
+     * *** Constant
      */
     public static final File SAVE_FILE = new File("savegame.dat");
 
     /*
-     * *** Attributs
+     * *** Attributs: Players and Entries
      */
     private Player player1;
     private AIPlayer player2;
@@ -26,28 +26,28 @@ public class Game {
     public Game() {
     }
 
+    /**
+     * Initialize the variables of game
+     * @return
+     */
     public Game init() {
         if (!loadSave()) {
-            // init attributes
             System.out.println("entre ton nom:");
             
-            // TODO use a scanner to read player name
             sin = new Scanner(System.in);
             String playerName = sin.nextLine();
-            // TODO init boards
+
             Board b1, b2;
             b1 = new Board(playerName);
             b2 = new Board("AI");
             
-            // TODO init this.player1 & this.player2
+
             List<AbstractShip> ships_p1 = new ArrayList<AbstractShip>();
-            ships_p1 = createDefaultShips();
-            
+            ships_p1 = createDefaultShips();          
             this.player1 = new Player(b1, b2, ships_p1, playerName);
             
             List<AbstractShip> ships_p2 = new ArrayList<AbstractShip>();
-            ships_p2 = createDefaultShips();
-            
+            ships_p2 = createDefaultShips();         
             this.player2 = new AIPlayer(b2, b1, ships_p2, "AI");
             
             
@@ -63,6 +63,9 @@ public class Game {
     /*
      * *** Méthodes
      */
+    /**
+     * Run the game
+     */
     public void run() {
         int[] coords = new int[2];
         Board b1 = player1.board;
@@ -75,8 +78,8 @@ public class Game {
         do {
             try{
 
-                hit = player1.sendHit(coords); // TODO player1 send a hit  
-                boolean strike = hit != Hit.MISS && hit != null; // TODO set this hit on his board (b1)
+                hit = player1.sendHit(coords);  
+                boolean strike = hit != Hit.MISS && hit != null; 
                 
                 done = updateScore();
                 System.out.println(makeHitMessage(false /* outgoing hit */, coords, hit));
@@ -85,7 +88,7 @@ public class Game {
                 
                 if (!done && !strike) {
                     do {
-                        hit = player2.sendHit(coords); // TODO player2 send a hit.
+                        hit = player2.sendHit(coords); 
                         
                         strike = hit != Hit.MISS;
                         if (strike) {
@@ -142,6 +145,10 @@ public class Game {
         return false;
     }
 
+    /**
+     * Updates the number of ships needed until the game is over
+     * @return True if you change the value and false for the opposite
+     */
     private boolean updateScore() {
         for (Player player : new Player[] { player1, player2 }) {
             int destroyed = 0;
@@ -160,6 +167,13 @@ public class Game {
         return false;
     }
 
+    /**
+     * According to the coming hit and the coordinates, it shows the messages related to each hit state
+     * @param incoming Whether or not it was subtle
+     * @param coords
+     * @param hit
+     * @return Message according to the shot: if it was successful, if I used it wrong, etc.
+     */
     private String makeHitMessage(boolean incoming, int[] coords, Hit hit) {
         String msg;
         ColorUtil.Color color = ColorUtil.Color.RESET;
@@ -184,6 +198,10 @@ public class Game {
         return ColorUtil.colorize(msg, color);
     }
 
+    /**
+     * Create ships for instance
+     * @return
+     */
     private static List<AbstractShip> createDefaultShips() {
         return Arrays.asList(new AbstractShip[] { new Destroyer(), new Submarine(), new Submarine(), new Battleship(),
                 new Carrier() });
