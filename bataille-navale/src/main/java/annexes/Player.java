@@ -95,7 +95,7 @@ public class Player {
                 coords[1] = hitInput.y;
                     System.out.println("cord0; " + coords[0] + " coord1: " + coords[1]);
                     System.out.println(board.getFrappes()[coords[0] - 1][coords[1] - 1]);
-                if (board.getFrappes()[coords[0] - 1][coords[1] - 1] != null){
+                if (board.getFrappes()[coords[1] - 1][coords[0] - 1] != null){
                     throw new Exception("You have already shot here");
                 }
 
